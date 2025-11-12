@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 530e556d4407947dcae7102ff497587d, type: 3}
+  m_Name: ExploradorFSM
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"title":"SeekFleeExplorador","summary":"Moviment de l''explorador","pan":{"x":186.9402,"y":-133.0598},"zoom":1.0,"elements":[{"nest":{"source":"Macro","macro":0,"embed":null},"isStart":true,"position":{"x":-514.0,"y":-115.0},"width":170.0,"guid":"166728cd-349d-4a6c-ba42-c9c4584c2fce","$version":"A","$type":"Unity.VisualScripting.FlowState","$id":"3"},{"nest":{"source":"Macro","macro":1,"embed":null},"isStart":false,"position":{"x":-12.0,"y":-401.0},"width":170.0,"guid":"0e9b8672-5edd-42de-ae87-06bbeaff621f","$version":"A","$type":"Unity.VisualScripting.FlowState","$id":"5"},{"nest":{"source":"Macro","macro":2,"embed":null},"isStart":false,"position":{"x":499.0,"y":-136.0},"width":170.0,"guid":"1f29cee3-6102-4d11-b34a-103e81f73bcf","$version":"A","$type":"Unity.VisualScripting.FlowState","$id":"7"},{"nest":{"source":"Macro","macro":3,"embed":null},"source":{"$ref":"3"},"destination":{"$ref":"5"},"guid":"ddee3098-732b-46f5-bc51-3cd9bf473be9","$version":"A","$type":"Unity.VisualScripting.FlowStateTransition"},{"nest":{"source":"Macro","macro":4,"embed":null},"source":{"$ref":"5"},"destination":{"$ref":"7"},"guid":"3b04aa70-de6a-404e-9577-eaab49eb1f62","$version":"A","$type":"Unity.VisualScripting.FlowStateTransition"},{"nest":{"source":"Macro","macro":5,"embed":null},"source":{"$ref":"7"},"destination":{"$ref":"3"},"guid":"a84fcd3c-330c-465e-9b1d-b331f37319d9","$version":"A","$type":"Unity.VisualScripting.FlowStateTransition"}],"$version":"A"}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: 340b934e3110ae4458d1f7de50002d6d, type: 2}
+    - {fileID: 11400000, guid: dd779a0037d0cb5478e8093ab520e434, type: 2}
+    - {fileID: 11400000, guid: a958cb2e3d6adc94cbede5986817b6a4, type: 2}
+    - {fileID: 11400000, guid: d4ad4b0d8eb052c4cb62262c85a9b27e, type: 2}
+    - {fileID: 11400000, guid: 2de32ffa254a8cd45aafd1ac28f95f61, type: 2}
+    - {fileID: 11400000, guid: aab22d199e5753642a32d8c1af07a7e3, type: 2}
