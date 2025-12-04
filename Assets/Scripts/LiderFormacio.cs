@@ -1,0 +1,125 @@
+using UnityEngine;
+using UnityEngine.AI;
+
+// -----------------------------------------------
+// MOVIMENT DEL LÍDER DE LA FORMACIÓ
+// -----------------------------------------------
+public class LiderFormacio : MonoBehaviour
+{
+    // ================ OBJECTES ==============
+    public GameObject bola;                                 // Bola que fa el patrol
+    public GameObject fantasmaEnemic;                       // Fantasma que ocasiona el flee
+
+    // ============== COMPONENTS ==============
+    private Animator liderAnimator;                         // Component Animator del lider
+    private NavMeshAgent liderAgent;                        // Component NavMeshAgent del lider
+
+    // =============== CONSTANTS ==============
+    private const float distanciaDeteccioFantasma = 2f;     // Distancia de deteccio del fantasma
+    private const float distanciaSeguretat = 5f;            // Distancia minima despres de fugir
+    private const float tempsEspera = 5f;                   // Temps minim que ha de romandre quiet sense el fantasma aprop
+    private const float velocitatFugida = 1.2f;             // Velocitat del lider quan fuig
+
+    // ================ ESTATS ================
+    public enum EstatsAgent { SEEK = 0, FLEE, AWAIT };      // Possibles estats del lider
+    public EstatsAgent estatActual;                         // Estat actual del lider
+
+    // ============== VARIABLES ===============
+    private float tempsEnSeguretat = 0;                     // Temps que porta en espera despres de fugir
+    private float distanciaFantasma;                        // Distancia entre el lider i el fantasma
+    private float velocitatNominal;                         // Velocitat estandard quan camina
+
+
+    // ============== ACTUALITZACIONS =========
+    private void Start()
+    {
+        liderAnimator = GetComponent<Animator>();
+        liderAgent = GetComponent<NavMeshAgent>();
+        velocitatNominal = liderAgent.speed;
+
+        IniciarSeek();
+    }
+
+    private void Update()
+    {
+        distanciaFantasma = Vector3.Distance(transform.position, fantasmaEnemic.transform.position);
+
+        switch (estatActual)
+        {
+            case EstatsAgent.SEEK:
+                Seek();
+                break;
+
+            case EstatsAgent.FLEE:
+                Flee();
+                break;
+
+            case EstatsAgent.AWAIT:
+                Await();
+                break;
+        }
+
+        // GESTIÓ DE TRANSICIONS
+        if (distanciaFantasma < distanciaDeteccioFantasma && estatActual == EstatsAgent.SEEK)
+        {
+            IniciarFlee();
+        }
+        else if ((distanciaFantasma > distanciaSeguretat || liderAgent.remainingDistance < 0.5f) && estatActual == EstatsAgent.FLEE)
+        {
+            IniciarAwait();
+        }
+        else if (tempsEnSeguretat > tempsEspera && distanciaFantasma > distanciaDeteccioFantasma && estatActual == EstatsAgent.AWAIT)
+        {
+            IniciarSeek();
+        }
+    }
+
+
+    // =============== FUNCIONS ==================
+    private void Seek()
+    {
+        liderAgent.destination = bola.transform.position;
+    }
+
+    private void Flee()
+    {
+        Vector3 vectorFlee = transform.position - fantasmaEnemic.transform.position;
+        Vector3 posicioFlee = transform.position + vectorFlee;
+        liderAgent.destination = posicioFlee;
+    }
+
+    private void Await()
+    {
+        tempsEnSeguretat += Time.deltaTime;
+    }
+
+
+    // =============== TRANSICIONS ===============
+    // Seek -> flee
+    private void IniciarFlee()
+    {
+        estatActual = EstatsAgent.FLEE;
+        liderAnimator.SetBool("StartWalking", false);
+        liderAnimator.SetBool("StartRunning", true);
+        liderAgent.speed = velocitatFugida;
+    }
+
+    // Flee -> await
+    private void IniciarAwait()
+    {
+        estatActual = EstatsAgent.AWAIT;
+        liderAnimator.SetBool("StartRunning", false);
+        liderAnimator.SetBool("StartWalking", false);
+        liderAgent.isStopped = true;
+    }
+
+    // Await -> seek
+    private void IniciarSeek()
+    {
+        estatActual = EstatsAgent.SEEK;
+        liderAnimator.SetBool("StartWalking", true);
+        liderAgent.isStopped = false;
+        liderAgent.speed = velocitatNominal;
+        tempsEnSeguretat = 0;
+    }
+}

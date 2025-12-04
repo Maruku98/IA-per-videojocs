@@ -22,7 +22,7 @@ public class Explorador : MonoBehaviour
     private const float distanciaSeguretat = 5f;            // Distancia minima despres de fugir
     private const float tempsEspera = 2f;                   // Temps minim que ha de romandre quiet sense el fantasma aprop
 
-    private EstatsAgent estatActual;     
+    private EstatsAgent estatActual;
     private float tempsEnSeguretat = 0;                     // Temps que porta en espera despres de fugir
     private float distanciaFantasma;                        // Distancia entre l'explorador i el fantasma
 
@@ -75,6 +75,7 @@ public class Explorador : MonoBehaviour
                 break;
         }
     }
+
     private void Seek()
     {
         exploradorAgent.destination = bolaAgent.transform.position;

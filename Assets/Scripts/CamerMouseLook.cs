@@ -49,6 +49,16 @@ public class CamerMouseLook : MonoBehaviour
             transform.position += transform.right * velocitatCamera * Time.deltaTime;
         }
 
-        transform.position = new Vector3(transform.position.x, alturaCamera, transform.position.z);
+        if (Input.GetKey(KeyCode.Space))
+        {
+            transform.position += transform.up * velocitatCamera * Time.deltaTime;
+        }
+
+        if (Input.GetKey(KeyCode.C))
+        {
+            transform.position -= transform.up * velocitatCamera * Time.deltaTime;
+        }
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
 }
