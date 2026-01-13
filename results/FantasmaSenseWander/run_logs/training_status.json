@@ -1,0 +1,29 @@
+{
+    "FantasmaAgent": {
+        "checkpoints": [
+            {
+                "steps": 278350,
+                "file_path": "results\\Fantasma\\FantasmaAgent\\FantasmaAgent-278350.onnx",
+                "reward": null,
+                "creation_time": 1767814552.5025046,
+                "auxillary_file_paths": [
+                    "results\\Fantasma\\FantasmaAgent\\FantasmaAgent-278350.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 278350,
+            "file_path": "results\\Fantasma\\FantasmaAgent.onnx",
+            "reward": null,
+            "creation_time": 1767814552.5025046,
+            "auxillary_file_paths": [
+                "results\\Fantasma\\FantasmaAgent\\FantasmaAgent-278350.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}
